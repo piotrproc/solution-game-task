@@ -1,11 +1,6 @@
 import { Application, Container, Text } from "pixi.js";
 
-function showTask(app: Application) {
-    app.stage.children[0].visible = !app.stage.children[0].visible;
-    app.stage.children[1].visible = !app.stage.children[1].visible;
-}
-
-export function addButtons(app: Application, container: Container) {
+export function addButtons(app: Application, container: Container, onClick: () => void) {
 
     const TEXTS = [
         "First assigment",
@@ -24,7 +19,7 @@ export function addButtons(app: Application, container: Container) {
         styleButtons(app, button, i);
 
         button.addListener('pointerdown', () => {
-            showTask(app);
+            onClick();
         });
 
         container.addChild(button);

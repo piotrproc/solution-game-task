@@ -34,18 +34,17 @@ import { addButtons } from "./components/gui/lobby.ts";
     addMainPageTitle(app, mainPage, "Game Development Assignment");
     addMainPageTitle(app, acePage, "Ace of Shadows");
 
-    const cards = createCards(app, acePage);
-    animateCardsInLoop(app, cards);
+    addButtons(app, mainPage, ()=> {
+        app.stage.children[0].visible = !app.stage.children[0].visible;
+        app.stage.children[1].visible = !app.stage.children[1].visible;
 
-    addButtons(app, mainPage)
+        const cards = createCards(app, acePage);
+        animateCardsInLoop(app, cards);
+    })
 
     acePage.visible = false;
     mainPage.visible = true;
 
     app.stage.addChild(acePage);
     app.stage.addChild(mainPage);
-
-    // playButton.addListener('pointerdown', () => {
-    //     console.log("Hello World")
-    // });
 })();
