@@ -1,11 +1,10 @@
 import { Application, Container, Sprite } from "pixi.js";
-
-export const CARDS_IN_COLUMN = 48;
+import { CARDS_IN_COLUMN, NUMBER_OF_CARDS } from "./globalVariables/consts.ts";
 
 export function createCards(app: Application, mainPage: Container) {
     const cards:Sprite[][] = [[], [], []];
 
-    for (let i = 0; i < 144; i++) {
+    for (let i = 0; i < NUMBER_OF_CARDS; i++) {
         const cardIndex = Math.floor(i / CARDS_IN_COLUMN);
         cards[cardIndex].push(createCard(app, mainPage, i));
     }

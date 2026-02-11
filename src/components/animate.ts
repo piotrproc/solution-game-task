@@ -1,13 +1,15 @@
 import { Application, Sprite, Ticker } from "pixi.js";
-import { ACE_ANIMATION_TIME, DECK_HEIGHT } from "./globalVariables/consts.ts";
+import { ACE_ANIMATION_TIME, CARDS_IN_COLUMN, DECK_HEIGHT, TO_DIFFERENT_STACK_TIME } from "./globalVariables/consts.ts";
 
 export function animateCardsInLoop(app: Application, cardsOnStacks: Sprite[][]) {
-    for(let i = 0; i < 5; i++) {
-        animateCards(app, cardsOnStacks);
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            animateCards(app, cardsOnStacks, i);
+        }, i * TO_DIFFERENT_STACK_TIME);
     }
 }
 
-export function animateCards(app: Application, cardsOnStacks: Sprite[][]) {
+export function animateCards(app: Application, cardsOnStacks: Sprite[][], shuffleNumber: number) {
     moveAllCardsExceptOne(cardsOnStacks[0])
     moveAllCardsExceptOne(cardsOnStacks[1])
     moveAllCardsExceptOne(cardsOnStacks[2])
@@ -16,17 +18,12 @@ export function animateCards(app: Application, cardsOnStacks: Sprite[][]) {
     const lastElement2 = cardsOnStacks[1].pop() as Sprite;
     const lastElement3 = cardsOnStacks[2].pop() as Sprite;
 
-    createRotationAnimation(app, lastElement1);
-    createRotationAnimation(app, lastElement2);
-    createRotationAnimationLastColumn(app, lastElement3);
+    createRotationAnimation(app, lastElement1, shuffleNumber);
+    createRotationAnimation(app, lastElement2, shuffleNumber);
+    createRotationAnimationLastColumn(app, lastElement3, shuffleNumber);
 
-    // console.log(lastElement3)
-    // lastElement3.visible = false
-    // cardsOnStacks[0].pop();
     cardsOnStacks[0].unshift(lastElement3);
-    // cardsOnStacks[1].pop();
     cardsOnStacks[1].unshift(lastElement1);
-    // cardsOnStacks[2].pop();
     cardsOnStacks[2].unshift(lastElement2);
 }
 
@@ -37,22 +34,23 @@ export function moveAllCardsExceptOne(cards: Sprite[]) {
     })
 }
 
-export function createRotationAnimation(app: Application, sprite: Sprite) {
-    sprite.zIndex = -1;
+export function createRotationAnimation(app: Application, sprite: Sprite, shuffleNumber:number) {
+    sprite.zIndex = -1 * shuffleNumber - 1;
 
     let offsetX = 0;
     let offsetY = 0;
 
     const ticker = new Ticker();
+
     ticker.add(() => {
         if (offsetX < app.screen.width / 4) {
-            sprite.x += 10;
-            offsetX += 10;
+            sprite.x += app.screen.width / 400;
+            offsetX += app.screen.width / 400;
         }
 
         if (offsetY < DECK_HEIGHT) {
-            sprite.y -= 15;
-            offsetY += 15;
+            sprite.y -= DECK_HEIGHT / CARDS_IN_COLUMN / 2;
+            offsetY += DECK_HEIGHT / CARDS_IN_COLUMN / 2;
         }
     });
     ticker.start();
@@ -62,8 +60,8 @@ export function createRotationAnimation(app: Application, sprite: Sprite) {
     }, ACE_ANIMATION_TIME)
 }
 
-export function createRotationAnimationLastColumn(app: Application, sprite: Sprite) {
-    sprite.zIndex = -1;
+export function createRotationAnimationLastColumn(app: Application, sprite: Sprite, shuffleNumber: number) {
+    sprite.zIndex = -1 * shuffleNumber - 1;
 
     let offsetX = 0;
     let offsetY = 0;
@@ -71,13 +69,13 @@ export function createRotationAnimationLastColumn(app: Application, sprite: Spri
     const ticker = new Ticker();
     ticker.add(() => {
         if (offsetX < app.screen.width / 2) {
-            sprite.x -= 10;
-            offsetX += 10;
+            sprite.x -= app.screen.width / 400 * 2;
+            offsetX += app.screen.width / 400 * 2;
         }
 
         if (offsetY < DECK_HEIGHT) {
-            sprite.y -= 8;
-            offsetY += 8;
+            sprite.y -= DECK_HEIGHT / CARDS_IN_COLUMN / 2;
+            offsetY += DECK_HEIGHT / CARDS_IN_COLUMN / 2;
         }
     });
     ticker.start();
