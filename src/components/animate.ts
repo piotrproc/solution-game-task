@@ -42,6 +42,7 @@ export function createRotationAnimation(app: Application, sprite: Sprite, stackI
     let offsetY = 0;
 
     const ticker = new Ticker();
+    ticker.maxFPS = 50; // ensures the animation runs for 2 seconds
 
     let flagX = false;
     let flagY = false;
@@ -75,6 +76,7 @@ export function createRotationAnimationLastColumn(app: Application, sprite: Spri
     let offsetY = 0;
 
     const ticker = new Ticker();
+    ticker.maxFPS = 50; // ensures the animation runs for 2 seconds
 
     let flagX = false;
     let flagY = false;
