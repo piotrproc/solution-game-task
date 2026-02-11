@@ -1,5 +1,4 @@
 import { Application, Assets, Container } from 'pixi.js';
-import { addPlayButtons } from "./components/gui/playButton.ts";
 import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/globalVariables/states.ts";
 import { createCards } from "./components/card.ts";
@@ -30,7 +29,6 @@ import { createCards } from "./components/card.ts";
     const mainPage = new Container();
 
     addMainPageTitle(app, mainPage, "Main game Screen");
-    const {playButton} = addPlayButtons(app, mainPage);
 
     createCards(app, mainPage)
 
@@ -38,7 +36,7 @@ import { createCards } from "./components/card.ts";
 
     app.stage.addChild(mainPage);
 
-    playButton.addListener('pointerdown', () => {
-        console.log("Hello World")
-    });
+    // playButton.addListener('pointerdown', () => {
+    //     console.log("Hello World")
+    // });
 })();
