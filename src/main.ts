@@ -1,0 +1,62 @@
+import { Application, Assets, Container } from 'pixi.js';
+import { addPlayButtons } from "./components/gui/playButton.ts";
+import { addMainPageTitle, addMoneyInfo } from "./components/gui/texts.ts";
+import { addChests } from "./components/chest.ts";
+import { createBonusPage } from "./components/bonus.ts";
+import { gameState } from "./components/globalVariables/states.ts";
+import { onChestClicked, onPlayButtonClicked } from "./components/handlers.ts";
+
+(async () => {
+    const app = new Application();
+
+    globalThis.__PIXI_APP__ = app;
+
+    await app.init({
+        background: "#06a159",
+        height: 1050,
+        width: 1200,
+    });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the textures
+    await Assets.load([
+        {alias: "playButton", src: "assets/play-button-on.png"},
+        {alias: "playButtonOff", src: "assets/play-button-off.png"},
+        {alias: "chest", src: "assets/treasure-chest.png"},
+        {alias: "chestOff", src: "assets/treasure-chest-off.png"},
+        {alias: "chestWin", src: "assets/treasure-chest-win.png"},
+        {alias: "chestBonus", src: "assets/treasure-chest-bonus.png"},
+        {alias: "heart", src: "assets/heart.png"}
+    ]);
+
+    gameState.value = "Initial";
+
+    const mainPage = new Container();
+
+    const moneyInfo = addMoneyInfo(app, mainPage);
+    addMainPageTitle(app, mainPage, "Main game Screen");
+    const allChests = addChests(app, mainPage);
+    const {playButton, playButtonOff} = addPlayButtons(app, mainPage);
+
+    mainPage.visible = true;
+
+    app.stage.addChild(mainPage);
+
+    playButton.addListener('pointerdown', () => {
+        onPlayButtonClicked(playButton, playButtonOff, allChests, moneyInfo);
+    });
+
+    allChests.forEach(chest => {
+        chest.addListener('pointerdown', () => {
+            onChestClicked(app, chest, allChests, moneyInfo, playButton, playButtonOff)
+        })
+    })
+
+    const bonusPage = new Container();
+    bonusPage.visible = false;
+    createBonusPage(app, bonusPage)
+
+    app.stage.addChild(bonusPage);
+})();
