@@ -2,7 +2,7 @@ import { Application, Assets, Container } from 'pixi.js';
 import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/globalVariables/states.ts";
 import { createCards } from "./components/card.ts";
-import { animateCards } from "./components/animate.ts";
+import { animateCardsInLoop } from "./components/animate.ts";
 
 (async () => {
     const app = new Application();
@@ -32,7 +32,7 @@ import { animateCards } from "./components/animate.ts";
     addMainPageTitle(app, mainPage, "Main game Screen");
     const cards = createCards(app, mainPage);
 
-    animateCards(app, cards);
+    animateCardsInLoop(app, cards);
 
 
     mainPage.visible = true;

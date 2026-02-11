@@ -28,7 +28,7 @@ function styleCard(app: Application, card: Sprite, index: number) {
     const columnOffset = columnIndex * 300;
 
     card.x = app.screen.width / 4 + columnOffset;
-    card.y = app.screen.height * (2 / 6) + (10 * (index % CARDS_IN_COLUMN));
+    card.y = app.screen.height * (1 / 3) + (10 * (index % CARDS_IN_COLUMN));
 
     card.width = 140;
     card.height = 200;
