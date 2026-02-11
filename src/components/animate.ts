@@ -1,5 +1,5 @@
 import { Application, Sprite, Ticker } from "pixi.js";
-import { SHIFT_ANIMATION_TIME, CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./globalVariables/consts.ts";
+import { CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./globalVariables/consts.ts";
 
 export function animateCardsInLoop(app: Application, cardsOnStacks: Sprite[][]) {
     for (let i = 0; i < 5; i++) {
@@ -43,22 +43,29 @@ export function createRotationAnimation(app: Application, sprite: Sprite, stackI
 
     const ticker = new Ticker();
 
+    let flagX = false;
+    let flagY = false;
+
     ticker.add(() => {
         if (offsetX < app.screen.width / 4) {
             sprite.x += app.screen.width / 400;
             offsetX += app.screen.width / 400;
+        } else {
+            flagX = true;
         }
 
         if (offsetY < DECK_HEIGHT) {
             sprite.y -= DECK_HEIGHT / CARDS_IN_COLUMN / 2;
             offsetY += DECK_HEIGHT / CARDS_IN_COLUMN / 2;
+        } else {
+            flagY = true;
+        }
+
+        if(flagX && flagY) {
+            ticker.stop();
         }
     });
     ticker.start();
-
-    setTimeout(function () {
-        ticker.stop()
-    }, SHIFT_ANIMATION_TIME)
 }
 
 export function createRotationAnimationLastColumn(app: Application, sprite: Sprite) {
@@ -68,20 +75,28 @@ export function createRotationAnimationLastColumn(app: Application, sprite: Spri
     let offsetY = 0;
 
     const ticker = new Ticker();
+
+    let flagX = false;
+    let flagY = false;
+
     ticker.add(() => {
         if (offsetX < app.screen.width / 2) {
             sprite.x -= app.screen.width / 400 * 2;
             offsetX += app.screen.width / 400 * 2;
+        } else {
+            flagX = true;
         }
 
         if (offsetY < DECK_HEIGHT) {
             sprite.y -= DECK_HEIGHT / CARDS_IN_COLUMN / 2;
             offsetY += DECK_HEIGHT / CARDS_IN_COLUMN / 2;
+        } else {
+            flagY = true;
+        }
+
+        if(flagX && flagY) {
+            ticker.stop();
         }
     });
     ticker.start();
-
-    setTimeout(function () {
-        ticker.stop()
-    }, SHIFT_ANIMATION_TIME)
 }
