@@ -2,6 +2,7 @@ import { Application, Assets, Container } from 'pixi.js';
 import { addPlayButtons } from "./components/gui/playButton.ts";
 import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/globalVariables/states.ts";
+import { createCards } from "./components/card.ts";
 
 (async () => {
     const app = new Application();
@@ -21,11 +22,7 @@ import { gameState } from "./components/globalVariables/states.ts";
     await Assets.load([
         {alias: "playButton", src: "assets/play-button-on.png"},
         {alias: "playButtonOff", src: "assets/play-button-off.png"},
-        {alias: "chest", src: "assets/treasure-chest.png"},
-        {alias: "chestOff", src: "assets/treasure-chest-off.png"},
-        {alias: "chestWin", src: "assets/treasure-chest-win.png"},
-        {alias: "chestBonus", src: "assets/treasure-chest-bonus.png"},
-        {alias: "heart", src: "assets/heart.png"}
+        {alias: "card", src: "assets/card-reverse.png"}
     ]);
 
     gameState.value = "Initial";
@@ -34,6 +31,8 @@ import { gameState } from "./components/globalVariables/states.ts";
 
     addMainPageTitle(app, mainPage, "Main game Screen");
     const {playButton} = addPlayButtons(app, mainPage);
+
+    createCards(app, mainPage)
 
     mainPage.visible = true;
 
