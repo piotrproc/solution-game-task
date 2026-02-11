@@ -1,10 +1,7 @@
 import { Application, Assets, Container } from 'pixi.js';
 import { addPlayButtons } from "./components/gui/playButton.ts";
-import { addMainPageTitle, addMoneyInfo } from "./components/gui/texts.ts";
-import { addChests } from "./components/chest.ts";
-import { createBonusPage } from "./components/bonus.ts";
+import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/globalVariables/states.ts";
-import { onChestClicked, onPlayButtonClicked } from "./components/handlers.ts";
 
 (async () => {
     const app = new Application();
@@ -35,28 +32,14 @@ import { onChestClicked, onPlayButtonClicked } from "./components/handlers.ts";
 
     const mainPage = new Container();
 
-    const moneyInfo = addMoneyInfo(app, mainPage);
     addMainPageTitle(app, mainPage, "Main game Screen");
-    const allChests = addChests(app, mainPage);
-    const {playButton, playButtonOff} = addPlayButtons(app, mainPage);
+    const {playButton} = addPlayButtons(app, mainPage);
 
     mainPage.visible = true;
 
     app.stage.addChild(mainPage);
 
     playButton.addListener('pointerdown', () => {
-        onPlayButtonClicked(playButton, playButtonOff, allChests, moneyInfo);
+        console.log("Hello World")
     });
-
-    allChests.forEach(chest => {
-        chest.addListener('pointerdown', () => {
-            onChestClicked(app, chest, allChests, moneyInfo, playButton, playButtonOff)
-        })
-    })
-
-    const bonusPage = new Container();
-    bonusPage.visible = false;
-    createBonusPage(app, bonusPage)
-
-    app.stage.addChild(bonusPage);
 })();
