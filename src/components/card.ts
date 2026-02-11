@@ -1,11 +1,16 @@
 import { Application, Container, Sprite } from "pixi.js";
 
-const CARDS_IN_COLUMN = 52;
+export const CARDS_IN_COLUMN = 48;
 
 export function createCards(app: Application, mainPage: Container) {
+    const cards:Sprite[][] = [[], [], []];
+
     for (let i = 0; i < 144; i++) {
-        createCard(app, mainPage, i)
+        const cardIndex = Math.floor(i / CARDS_IN_COLUMN);
+        cards[cardIndex].push(createCard(app, mainPage, i));
     }
+
+    return cards;
 }
 
 function createCard(app: Application, mainPage:Container, index: number) {
@@ -19,7 +24,7 @@ function createCard(app: Application, mainPage:Container, index: number) {
 function styleCard(app: Application, card: Sprite, index: number) {
     card.anchor.set(0.5);
 
-    const columnIndex = Math.floor(index / 52);
+    const columnIndex = Math.floor(index / CARDS_IN_COLUMN);
     const columnOffset = columnIndex * 300;
 
     card.x = app.screen.width / 4 + columnOffset;
