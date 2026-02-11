@@ -34,11 +34,9 @@ import { animateCardsInLoop } from "./components/animate.ts";
 
     animateCardsInLoop(app, cards);
 
-
     mainPage.visible = true;
     app.stage.addChild(mainPage);
 
-    console.log(mainPage);
     // playButton.addListener('pointerdown', () => {
     //     console.log("Hello World")
     // });
