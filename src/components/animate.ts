@@ -35,7 +35,7 @@ export function moveAllCardsExceptOne(cards: Sprite[], stackIndex: number) {
     })
 }
 
-export function createRotationAnimation(app: Application, sprite: Sprite, stackIndex:number) {
+export function createRotationAnimation(app: Application, sprite: Sprite, stackIndex: number) {
     sprite.zIndex = stackIndex * 2 + 1;
 
     let offsetX = 0;
@@ -61,7 +61,7 @@ export function createRotationAnimation(app: Application, sprite: Sprite, stackI
             flagY = true;
         }
 
-        if(flagX && flagY) {
+        if (flagX && flagY) {
             ticker.stop();
         }
     });
@@ -94,7 +94,7 @@ export function createRotationAnimationLastColumn(app: Application, sprite: Spri
             flagY = true;
         }
 
-        if(flagX && flagY) {
+        if (flagX && flagY) {
             ticker.stop();
         }
     });
