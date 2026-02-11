@@ -3,6 +3,7 @@ import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/globalVariables/states.ts";
 import { createCards } from "./components/card.ts";
 import { animateCardsInLoop } from "./components/animate.ts";
+import { addButtons } from "./components/gui/lobby.ts";
 
 (async () => {
     const app = new Application();
@@ -28,13 +29,20 @@ import { animateCardsInLoop } from "./components/animate.ts";
     gameState.value = "Initial";
 
     const mainPage = new Container();
+    const acePage = new Container();
 
-    addMainPageTitle(app, mainPage, "Main game Screen");
-    const cards = createCards(app, mainPage);
+    addMainPageTitle(app, mainPage, "Game Development Assignment");
+    addMainPageTitle(app, acePage, "Ace of Shadows");
 
+    const cards = createCards(app, acePage);
     animateCardsInLoop(app, cards);
 
+    addButtons(app, mainPage)
+
+    acePage.visible = false;
     mainPage.visible = true;
+
+    app.stage.addChild(acePage);
     app.stage.addChild(mainPage);
 
     // playButton.addListener('pointerdown', () => {
