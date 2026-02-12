@@ -3,7 +3,7 @@ import { addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/ace/globalVariables/states.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
-import { addButtons } from "./components/gui/lobby.ts";
+import { addBackButton, addTaskButtons } from "./components/gui/lobby.ts";
 import { getDialogueFromUrl } from "./components/magic/getUrl/dialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
 
@@ -23,8 +23,7 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
 
     // Load the textures
     await Assets.load([
-        {alias: "playButton", src: "assets/play-button-on.png"},
-        {alias: "playButtonOff", src: "assets/play-button-off.png"},
+        {alias: "button-back", src: "assets/button-back.png"},
         {alias: "card", src: "assets/card-reverse.png"},
         {alias: "emoji-sad", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Sad', loadParser: 'loadTextures'},
         {alias: "emoji-intrigued", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Sawyer', loadParser: 'loadTextures'},
@@ -47,7 +46,7 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     addMainPageTitle(app, acePage, "Ace of Shadows");
     addMainPageTitle(app, magicPage, "Magic Words");
 
-    addButtons(app, mainPage, [() => {
+    addTaskButtons(app, mainPage, [() => {
             app.stage.children[0].visible = false;
             app.stage.children[1].visible = true;
             app.stage.children[2].visible = false;
@@ -82,4 +81,6 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     app.stage.children[0].visible = true;
     app.stage.children[1].visible = false;
     app.stage.children[2].visible = false;
+
+    addBackButton(app, app.stage);
 })();
