@@ -6,5 +6,9 @@ export const EMOJIS = {
     intrigued: 'emoji-intrigued',
     neutral: 'emoji-neutral',
     satisfied: 'emoji-satisfied',
-    laughing: 'emoji-laughing'
+    laughing: 'emoji-laughing',
+    Sheldon: 'user-sheldon',
+    Leonard: 'user-leonard',
+    Penny: 'user-penny',
+    Neighbour: 'user-neighbour',
 };

@@ -1,5 +1,5 @@
 import { Container, TextStyle } from "pixi.js";
-import { DialogueType, MagicType } from "../magicTypes.ts";
+import { AvatarsType, DialogueType, MagicType } from "../magicTypes.ts";
 import { createChatLine } from "./emojies.ts";
 
 export function getDialogueFromUrl(container: Container, url: string) {
@@ -8,12 +8,12 @@ export function getDialogueFromUrl(container: Container, url: string) {
         .then(res => res.json())
         .then((res: MagicType) => {
             console.log(res);
-            insertDialogueToContainer(container, res.dialogue);
+            insertDialogueToContainer(container, res.dialogue, res.avatars);
         })
 
 }
 
-function insertDialogueToContainer(container: Container, dialogue: DialogueType[]) {
+function insertDialogueToContainer(container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
 
     const style = new TextStyle({
         fontFamily: 'Arial',
@@ -22,15 +22,16 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
     });
 
     dialogue.forEach((dialogueObject, index) => {
-        const text = `${dialogueObject.name}:  ${dialogueObject.text}`;
+        const text = `{${dialogueObject.name}}:  ${dialogueObject.text}`;
 
         const chatLine = createChatLine(
             text,
-            style,
-            dialogueObject.name
+            style
         );
 
-        if (dialogueObject.name !== "Sheldon") {
+        const align = getAlignFromAvatar(avatars, dialogueObject)
+
+        if (align === "right") {
             chatLine.pivot.x = chatLine.width - 1050;
             chatLine.x = container.width;
         }
@@ -38,4 +39,10 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
         chatLine.position.set(50, 200 + index * 50);
         container.addChild(chatLine);
     })
+}
+
+function getAlignFromAvatar(avatars: AvatarsType[], dialogueObject:DialogueType) {
+    return (avatars.find(avatar => {
+        return avatar.name === dialogueObject.name;
+    }) || {position: "right"}).position;
 }

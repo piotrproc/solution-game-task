@@ -31,6 +31,10 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
         {alias: "emoji-neutral", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Destiny', loadParser: 'loadTextures'},
         {alias: "emoji-satisfied", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Jocelyn', loadParser: 'loadTextures'},
         {alias: "emoji-laughing", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Sophia', loadParser: 'loadTextures'},
+        {alias: "user-sheldon", src: 'https://api.dicebear.com/9.x/personas/png?body=squared&clothingColor=6dbb58&eyes=open&hair=buzzcut&hairColor=6c4545&mouth=smirk&nose=smallRound&skinColor=e5a07e', loadParser: 'loadTextures'},
+        {alias: "user-leonard", src: 'https://api.dicebear.com/9.x/personas/png?body=checkered&clothingColor=f3b63a&eyes=glasses&hair=shortCombover&hairColor=362c47&mouth=surprise&nose=mediumRound&skinColor=d78774', loadParser: 'loadTextures'},
+        {alias: "user-penny", src: 'https://api.dicebear.com/9.x/personas/png?body=squared&clothingColor=f55d81&eyes=happy&hair=extraLong&hairColor=f29c65&mouth=smile&nose=smallRound&skinColor=e5a07e', loadParser: 'loadTextures'},
+        {alias: "user-neighbour", src: 'https://api.dicebear.com/9.x/personas/png', loadParser: 'loadTextures'},
     ]);
 
     gameState.value = "Initial";

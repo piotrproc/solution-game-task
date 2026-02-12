@@ -34,7 +34,7 @@ function parseMessage(text) {
     return parts;
 }
 
-export function createChatLine(message, style, sender: string) {
+export function createChatLine(message, style) {
     const container = new Container();
     const parts = parseMessage(message);
 
@@ -53,12 +53,11 @@ export function createChatLine(message, style, sender: string) {
             text.y = 0;
 
             x += text.width;
-            // text.anchor.set(sender ==="Sheldon" ? 0: -1);
             container.addChild(text);
         }
 
         if (part.type === 'emoji' && EMOJIS[part.value]) {
-            const sprite = Sprite.from(EMOJIS[part.value]);;
+            const sprite = Sprite.from(EMOJIS[part.value]);
 
             sprite.width = lineHeight;
             sprite.height = lineHeight;
