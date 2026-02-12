@@ -6,7 +6,6 @@ import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addButtons } from "./components/gui/lobby.ts";
 import { getDialogueFromUrl } from "./components/magic/getUrl/dialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
-import { putMessage } from "./components/magic/getUrl/emojies.ts";
 
 (async () => {
     const app = new Application();
@@ -58,7 +57,6 @@ import { putMessage } from "./components/magic/getUrl/emojies.ts";
             app.stage.children[2].visible = true;
 
             getDialogueFromUrl(magicPage, MAGIC_DIALOGUE_URL)
-            putMessage(magicPage);
         },
         () => {
             app.stage.children[0].visible = !app.stage.children[0].visible;

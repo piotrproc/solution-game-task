@@ -1,28 +1,5 @@
-import { Container, Sprite, Text, TextStyle } from "pixi.js";
-
-const EMOJIS = {
-    sad: "emoji-sad",
-    intrigued: 'emoji-intrigued',
-    neutral: 'emoji-neutral',
-    satisfied: 'emoji-satisfied',
-    laughing: 'emoji-laughing'
-};
-
-export function putMessage(container: Container) {
-    const style = new TextStyle({
-        fontFamily: 'Arial',
-        fontSize: 24,
-        fill: 0xffffff
-    });
-
-    const chatLine = createChatLine(
-        "Hello {sad} how are you {intrigued}",
-        style
-    );
-
-    chatLine.position.set(50, 100);
-    container.addChild(chatLine);
-}
+import { Container, Sprite, Text } from "pixi.js";
+import { EMOJIS } from "../globalVariables/consts.ts";
 
 function parseMessage(text) {
     const regex = /{(.*?)}/g;
@@ -57,7 +34,7 @@ function parseMessage(text) {
     return parts;
 }
 
-function createChatLine(message, style) {
+export function createChatLine(message, style, sender: string) {
     const container = new Container();
     const parts = parseMessage(message);
 
@@ -72,11 +49,11 @@ function createChatLine(message, style) {
                 style
             });
 
-
             text.x = x;
             text.y = 0;
 
             x += text.width;
+            // text.anchor.set(sender ==="Sheldon" ? 0: -1);
             container.addChild(text);
         }
 

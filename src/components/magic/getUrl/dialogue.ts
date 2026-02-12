@@ -1,5 +1,6 @@
-import { Container, Sprite, Text } from "pixi.js";
-import { DialogueType, EmojiesType, MagicType } from "../magicTypes.ts";
+import { Container, TextStyle } from "pixi.js";
+import { DialogueType, MagicType } from "../magicTypes.ts";
+import { createChatLine } from "./emojies.ts";
 
 export function getDialogueFromUrl(container: Container, url: string) {
 
@@ -7,30 +8,32 @@ export function getDialogueFromUrl(container: Container, url: string) {
         .then(res => res.json())
         .then((res: MagicType) => {
             console.log(res);
-            insertDialogueToContainer(container, res.dialogue, res.emojies);
+            insertDialogueToContainer(container, res.dialogue);
         })
 
 }
 
-function insertDialogueToContainer(container: Container, dialogue: DialogueType[], emojies: EmojiesType[]) {
+function insertDialogueToContainer(container: Container, dialogue: DialogueType[]) {
 
-    // const sprite = Sprite.from("emoji-sad");
-    // container.addChild(sprite);
+    const style = new TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 24,
+        fill: 0xffffff
+    });
 
-    // dialogue.forEach((dialogueObject, index) => {
-    //     const text = `${dialogueObject.name}:  ${dialogueObject.text}`;
-    //
-    //     const textObject = new Text({
-    //         text,
-    //         style: {
-    //             fontSize: 25,
-    //             wordWrap: true,
-    //             wordWrapWidth: 1150
-    //         },
-    //         x: 50,
-    //         y: 200 + index * 50
-    //     });
-    //
-    //     container.addChild(textObject);
-    // })
+    dialogue.forEach((dialogueObject, index) => {
+        const text = `${dialogueObject.name}:  ${dialogueObject.text}`;
+
+        const chatLine = createChatLine(
+            text,
+            style,
+            dialogueObject.name
+        );
+
+        const pivotX = dialogueObject.name === "Sheldon" ? 0: -100;
+        chatLine.pivot.set(pivotX, 0);
+
+        chatLine.position.set(50, 200 + index * 50);
+        container.addChild(chatLine);
+    })
 }
