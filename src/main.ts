@@ -1,5 +1,5 @@
 import { Application, Assets, Container } from 'pixi.js';
-import { addMainPageTitle } from "./components/gui/texts.ts";
+import { addFpsInfo, addMainPageTitle } from "./components/gui/texts.ts";
 import { gameState } from "./components/ace/globalVariables/states.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
@@ -83,4 +83,5 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     app.stage.children[2].visible = false;
 
     addBackButton(app, app.stage);
+    addFpsInfo(app, app.stage);
 })();

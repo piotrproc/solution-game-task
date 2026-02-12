@@ -12,12 +12,10 @@ npm run dev
 ## Architecture
 
 - Pixi.js version 8.14.3
-- Code split across 3 main regions: GUI, winPresentation an globalVariables,
+- Code split across 3 main tasks as was described in the instructions
 - Animations are executed by pixi.ticker
 
 ## Notes
 
 - Game is deployed by vercel:
-    - https://chest-game.vercel.app/
-- Game has a fixed size - you need to adjust resolution of your browser to play the game
-    - Game <ins>is not supported on mobile</ins> at the time    
+    - TBD.
