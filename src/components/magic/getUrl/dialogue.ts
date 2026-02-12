@@ -1,4 +1,4 @@
-import { Container, Text } from "pixi.js";
+import { Container, Sprite, Text } from "pixi.js";
 import { DialogueType, EmojiesType, MagicType } from "../magicTypes.ts";
 
 export function getDialogueFromUrl(container: Container, url: string) {
@@ -14,20 +14,23 @@ export function getDialogueFromUrl(container: Container, url: string) {
 
 function insertDialogueToContainer(container: Container, dialogue: DialogueType[], emojies: EmojiesType[]) {
 
-    dialogue.forEach((dialogueObject, index) => {
-        const text = `${dialogueObject.name}:  ${dialogueObject.text}`;
+    // const sprite = Sprite.from("emoji-sad");
+    // container.addChild(sprite);
 
-        const textObject = new Text({
-            text,
-            style: {
-                fontSize: 25,
-                wordWrap: true,
-                wordWrapWidth: 1150
-            },
-            x: 50,
-            y: 200 + index * 50
-        });
-
-        container.addChild(textObject);
-    })
+    // dialogue.forEach((dialogueObject, index) => {
+    //     const text = `${dialogueObject.name}:  ${dialogueObject.text}`;
+    //
+    //     const textObject = new Text({
+    //         text,
+    //         style: {
+    //             fontSize: 25,
+    //             wordWrap: true,
+    //             wordWrapWidth: 1150
+    //         },
+    //         x: 50,
+    //         y: 200 + index * 50
+    //     });
+    //
+    //     container.addChild(textObject);
+    // })
 }
