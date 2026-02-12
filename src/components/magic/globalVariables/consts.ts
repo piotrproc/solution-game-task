@@ -1,0 +1,1 @@
+export const MAGIC_DIALOGUE_URL = "https://private-624120-softgamesassignment.apiary-mock.com/v2/magicwords";

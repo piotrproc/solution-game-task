@@ -4,6 +4,8 @@ import { gameState } from "./components/ace/globalVariables/states.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addButtons } from "./components/gui/lobby.ts";
+import { dialogue } from "./components/magic/getUrl/dialogue.ts";
+import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
 
 (async () => {
     const app = new Application();
@@ -48,6 +50,8 @@ import { addButtons } from "./components/gui/lobby.ts";
             app.stage.children[0].visible = false;
             app.stage.children[1].visible = false;
             app.stage.children[2].visible = true;
+
+            dialogue(magicPage, MAGIC_DIALOGUE_URL)
         },
         () => {
             app.stage.children[0].visible = !app.stage.children[0].visible;
