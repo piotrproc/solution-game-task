@@ -1,6 +1,6 @@
 import { Container, TextStyle } from "pixi.js";
-import { AvatarsType, DialogueType, MagicType } from "../magicTypes.ts";
-import { createChatLine } from "./emojies.ts";
+import { AvatarsType, DialogueType, MagicType } from "./types.ts";
+import { createChatLine } from "./parseChat.ts";
 
 export function getDialogueFromUrl(container: Container, url: string) {
 

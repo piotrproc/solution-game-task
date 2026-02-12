@@ -4,7 +4,7 @@ import { gameState } from "./components/ace/globalVariables/states.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addBackButton, addTaskButtons } from "./components/gui/lobby.ts";
-import { getDialogueFromUrl } from "./components/magic/getUrl/dialogue.ts";
+import { getDialogueFromUrl } from "./components/magic/getDialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
 
 (async () => {
