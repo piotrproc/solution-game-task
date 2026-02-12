@@ -1,8 +1,8 @@
 import { Application, Assets, Container } from 'pixi.js';
 import { addMainPageTitle } from "./components/gui/texts.ts";
-import { gameState } from "./components/globalVariables/states.ts";
-import { createCards } from "./components/card.ts";
-import { animateCardsInLoop } from "./components/animate.ts";
+import { gameState } from "./components/ace/globalVariables/states.ts";
+import { createCards } from "./components/ace/card.ts";
+import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addButtons } from "./components/gui/lobby.ts";
 
 (async () => {
@@ -30,21 +30,43 @@ import { addButtons } from "./components/gui/lobby.ts";
 
     const mainPage = new Container();
     const acePage = new Container();
+    const magicPage = new Container();
 
     addMainPageTitle(app, mainPage, "Game Development Assignment");
     addMainPageTitle(app, acePage, "Ace of Shadows");
+    addMainPageTitle(app, magicPage, "Magic Words");
 
-    addButtons(app, mainPage, ()=> {
-        app.stage.children[0].visible = !app.stage.children[0].visible;
-        app.stage.children[1].visible = !app.stage.children[1].visible;
+    addButtons(app, mainPage, [() => {
+            app.stage.children[0].visible = false;
+            app.stage.children[1].visible = true;
+            app.stage.children[2].visible = false;
 
-        const cards = createCards(app, acePage);
-        animateCardsInLoop(app, cards);
-    })
+            const cards = createCards(app, acePage);
+            animateCardsInLoop(app, cards);
+        },
+        () => {
+            app.stage.children[0].visible = false;
+            app.stage.children[1].visible = false;
+            app.stage.children[2].visible = true;
+        },
+        () => {
+            app.stage.children[0].visible = !app.stage.children[0].visible;
+            app.stage.children[1].visible = !app.stage.children[1].visible;
+            app.stage.children[2].visible = !app.stage.children[2].visible;
+
+            const cards = createCards(app, acePage);
+            animateCardsInLoop(app, cards);
+        }
+    ])
 
     acePage.visible = false;
     mainPage.visible = true;
 
-    app.stage.addChild(acePage);
     app.stage.addChild(mainPage);
+    app.stage.addChild(acePage);
+    app.stage.addChild(magicPage);
+
+    app.stage.children[0].visible = true;
+    app.stage.children[1].visible = false;
+    app.stage.children[2].visible = false;
 })();

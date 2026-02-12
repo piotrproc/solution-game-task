@@ -1,6 +1,6 @@
 import { Application, Container, Text } from "pixi.js";
 
-export function addButtons(app: Application, container: Container, onClick: () => void) {
+export function addButtons(app: Application, container: Container, onClick: (() => void)[]) {
 
     const TEXTS = [
         "First assigment",
@@ -19,7 +19,7 @@ export function addButtons(app: Application, container: Container, onClick: () =
         styleButtons(app, button, i);
 
         button.addListener('pointerdown', () => {
-            onClick();
+            onClick[i]();
         });
 
         container.addChild(button);
