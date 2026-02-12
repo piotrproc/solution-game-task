@@ -30,8 +30,10 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
             dialogueObject.name
         );
 
-        const pivotX = dialogueObject.name === "Sheldon" ? 0: -100;
-        chatLine.pivot.set(pivotX, 0);
+        if (dialogueObject.name !== "Sheldon") {
+            chatLine.pivot.x = chatLine.width - 1050;
+            chatLine.x = container.width;
+        }
 
         chatLine.position.set(50, 200 + index * 50);
         container.addChild(chatLine);
