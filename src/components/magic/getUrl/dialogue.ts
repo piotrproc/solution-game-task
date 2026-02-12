@@ -7,7 +7,6 @@ export function getDialogueFromUrl(container: Container, url: string) {
     fetch(url)
         .then(res => res.json())
         .then((res: MagicType) => {
-            console.log(res);
             insertDialogueToContainer(container, res.dialogue, res.avatars);
         })
 
@@ -22,7 +21,7 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
     });
 
     dialogue.forEach((dialogueObject, index) => {
-        const text = `{${dialogueObject.name}}:  ${dialogueObject.text}`;
+        const text = `{${dialogueObject.name}}  ${dialogueObject.text}`;
 
         const chatLine = createChatLine(
             text,

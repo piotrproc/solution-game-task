@@ -58,9 +58,10 @@ export function createChatLine(message, style) {
 
         if (part.type === 'emoji' && EMOJIS[part.value]) {
             const sprite = Sprite.from(EMOJIS[part.value]);
+            sprite.anchor.set(0, 0.3);
 
-            sprite.width = lineHeight;
-            sprite.height = lineHeight;
+            sprite.width = lineHeight * 1.5;
+            sprite.height = lineHeight * 1.5;
             sprite.x = x;
             sprite.y = 0;
 

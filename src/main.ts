@@ -63,9 +63,9 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
             getDialogueFromUrl(magicPage, MAGIC_DIALOGUE_URL)
         },
         () => {
-            app.stage.children[0].visible = !app.stage.children[0].visible;
-            app.stage.children[1].visible = !app.stage.children[1].visible;
-            app.stage.children[2].visible = !app.stage.children[2].visible;
+            app.stage.children[0].visible = false;
+            app.stage.children[1].visible = false;
+            app.stage.children[2].visible = false;
 
             const cards = createCards(app, acePage);
             animateCardsInLoop(app, cards);
