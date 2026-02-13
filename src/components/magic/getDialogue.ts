@@ -1,6 +1,8 @@
 import { Application, Container, Text, TextStyle } from "pixi.js";
 import { AvatarsType, DialogueType, MagicType } from "./types.ts";
 import { createChatLine } from "./parseChat.ts";
+import { SCREEN_SIZE_Y } from "../states.ts";
+import { HEIGHT_OF_ONE_MESSAGE } from "./consts.ts";
 
 let isTextLoaded = false;
 
@@ -8,6 +10,8 @@ export function getDialogueFromUrl(app: Application, container: Container, url: 
 
     const loadingText = addLoadingText(app, container, "Loading...");
     loadingText.visible = !isTextLoaded;
+
+    app.renderer.resize(app.screen.width, SCREEN_SIZE_Y.value);
 
     fetch(url)
         .then(res => res.json())
@@ -17,6 +21,8 @@ export function getDialogueFromUrl(app: Application, container: Container, url: 
                 loadingText.visible = false;
 
                 insertDialogueToContainer(app, container, res.dialogue, res.avatars);
+                SCREEN_SIZE_Y.value = res.dialogue.length * HEIGHT_OF_ONE_MESSAGE;
+                app.renderer.resize(app.screen.width, SCREEN_SIZE_Y.value);
             }
         })
 
@@ -50,10 +56,7 @@ function insertDialogueToContainer(app:Application, container: Container, dialog
     dialogue.forEach((dialogueObject, index) => {
         const text = `{${dialogueObject.name}}  ${dialogueObject.text}`;
 
-        const chatLine = createChatLine(
-            text,
-            style
-        );
+        const chatLine = createChatLine(text, style);
 
         const align = getAlignFromAvatar(avatars, dialogueObject)
 

@@ -1,5 +1,5 @@
 export const TASK_TEXTS = [
-    "First assigment",
-    "Second assigment",
-    "Third assigment"
+    "1st assigment",
+    "2nd assigment",
+    "3rd assigment"
 ];

@@ -11,3 +11,5 @@ export const EMOJIS = {
     Penny: 'user-penny',
     Neighbour: 'user-neighbour',
 };
+
+export const HEIGHT_OF_ONE_MESSAGE = 65;

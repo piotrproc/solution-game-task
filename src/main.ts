@@ -7,6 +7,7 @@ import { getDialogueFromUrl } from "./components/magic/getDialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/consts.ts";
 import { createParticles } from "./components/phoenix/particles.ts";
 import { hideAllTabs } from "./components/utils.ts";
+import { INITIAL_SCREEN_SIZE_Y } from "./components/states.ts";
 
 (async () => {
     const app = new Application();
@@ -18,6 +19,8 @@ import { hideAllTabs } from "./components/utils.ts";
         width: window.innerWidth,
         height: window.innerHeight,
     });
+
+    INITIAL_SCREEN_SIZE_Y.value = window.innerHeight;
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
