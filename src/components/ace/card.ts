@@ -1,5 +1,5 @@
 import { Application, Container, Sprite } from "pixi.js";
-import { CARDS_IN_COLUMN, NUMBER_OF_CARDS } from "./consts.ts";
+import { CARD_HEIGHT, CARD_WIDTH, CARDS_IN_COLUMN, COLUMN_GAP, NUMBER_OF_CARDS } from "./consts.ts";
 
 export function createCards(app: Application, mainPage: Container) {
     const cards:Sprite[][] = [[], [], []];
@@ -24,13 +24,13 @@ function styleCard(app: Application, card: Sprite, index: number) {
     card.anchor.set(0.5);
 
     const columnIndex = Math.floor(index / CARDS_IN_COLUMN);
-    const columnOffset = columnIndex * 300;
+    const columnOffset = columnIndex * COLUMN_GAP;
 
     card.x = app.screen.width / 4 + columnOffset;
     card.y = app.screen.height * (1 / 3) + (10 * (index % CARDS_IN_COLUMN));
 
-    card.width = 140;
-    card.height = 200;
+    card.width = CARD_WIDTH;
+    card.height = CARD_HEIGHT;
 
     card.eventMode = 'static';
     card.cursor = 'pointer';

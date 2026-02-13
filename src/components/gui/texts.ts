@@ -18,10 +18,13 @@ export function addMainPageTitle(app: Application, container: Container, text: s
 }
 
 export function addFpsInfo(ticker: Ticker, container: Container, position: {x:number, y:number}, name: string) {
-    const fpsText = new Text(`${name} 0`, {
-        fontFamily: 'Arial',
-        fontSize: 24,
-        fill: 0xffffff,
+    const fpsText = new Text({
+        text: `${name} 0`,
+        style: {
+            fontFamily: 'Arial',
+            fontSize: 24,
+            fill: 0xffffff
+        }
     });
 
     fpsText.x = position.x;

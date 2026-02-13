@@ -1,17 +1,12 @@
 import { Application, Container, Sprite, Text } from "pixi.js";
 import { hideAllTabs } from "../utils.ts";
+import { TASK_TEXTS } from "./consts.ts";
 
 export function addTaskButtons(app: Application, container: Container, onClick: (() => void)[]) {
 
-    const TEXTS = [
-        "First assigment",
-        "Second assigment",
-        "Third assigment"
-    ];
-
     for (let i = 0; i < 3; i++) {
         const button = new Text({
-            text: TEXTS[i],
+            text: TASK_TEXTS[i],
             style: {
                 fontSize: 30,
                 fill: 0xffffff
