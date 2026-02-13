@@ -6,6 +6,7 @@ import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addBackButton, addTaskButtons } from "./components/gui/lobby.ts";
 import { getDialogueFromUrl } from "./components/magic/getDialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
+import { createParticles } from "./components/phoenix/particles.ts";
 
 (async () => {
     const app = new Application();
@@ -25,6 +26,7 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     await Assets.load([
         {alias: "button-back", src: "assets/button-back.png"},
         {alias: "card", src: "assets/card-reverse.png"},
+        {alias: "fire", src: "assets/fire.png"},
         {alias: "emoji-sad", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Sad', loadParser: 'loadTextures'},
         {alias: "emoji-intrigued", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Sawyer', loadParser: 'loadTextures'},
         {alias: "emoji-neutral", src: 'https://api.dicebear.com/9.x/fun-emoji/png?seed=Destiny', loadParser: 'loadTextures'},
@@ -41,15 +43,18 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     const mainPage = new Container();
     const acePage = new Container();
     const magicPage = new Container();
+    const phoenixPage = new Container();
 
     addMainPageTitle(app, mainPage, "Game Development Assignment");
     addMainPageTitle(app, acePage, "Ace of Shadows");
     addMainPageTitle(app, magicPage, "Magic Words");
+    addMainPageTitle(app, phoenixPage, "Phoenix Flame");
 
     addTaskButtons(app, mainPage, [() => {
             app.stage.children[0].visible = false;
             app.stage.children[1].visible = true;
             app.stage.children[2].visible = false;
+            app.stage.children[3].visible = false;
 
             const cards = createCards(app, acePage);
             animateCardsInLoop(app, cards);
@@ -58,6 +63,7 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
             app.stage.children[0].visible = false;
             app.stage.children[1].visible = false;
             app.stage.children[2].visible = true;
+            app.stage.children[3].visible = false;
 
             getDialogueFromUrl(magicPage, MAGIC_DIALOGUE_URL)
         },
@@ -65,9 +71,9 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
             app.stage.children[0].visible = false;
             app.stage.children[1].visible = false;
             app.stage.children[2].visible = false;
+            app.stage.children[3].visible = true;
 
-            const cards = createCards(app, acePage);
-            animateCardsInLoop(app, cards);
+            createParticles(app, phoenixPage);
         }
     ])
 
@@ -77,10 +83,12 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts
     app.stage.addChild(mainPage);
     app.stage.addChild(acePage);
     app.stage.addChild(magicPage);
+    app.stage.addChild(phoenixPage);
 
     app.stage.children[0].visible = true;
     app.stage.children[1].visible = false;
     app.stage.children[2].visible = false;
+    app.stage.children[3].visible = false;
 
     addBackButton(app, app.stage);
     addFpsInfo(app, app.stage);

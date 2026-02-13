@@ -45,6 +45,7 @@ export function addBackButton(app: Application, container: Container) {
         app.stage.children[0].visible = true;
         app.stage.children[1].visible = false;
         app.stage.children[2].visible = false;
+        app.stage.children[3].visible = false;
     });
 
     container.addChild(button);
