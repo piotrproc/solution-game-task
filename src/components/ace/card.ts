@@ -1,5 +1,5 @@
 import { Application, Container, Sprite } from "pixi.js";
-import { CARDS_IN_COLUMN, NUMBER_OF_CARDS } from "./globalVariables/consts.ts";
+import { CARDS_IN_COLUMN, NUMBER_OF_CARDS } from "./consts.ts";
 
 export function createCards(app: Application, mainPage: Container) {
     const cards:Sprite[][] = [[], [], []];

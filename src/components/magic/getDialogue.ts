@@ -1,15 +1,39 @@
-import { Container, TextStyle } from "pixi.js";
+import { Application, Container, Text, TextStyle } from "pixi.js";
 import { AvatarsType, DialogueType, MagicType } from "./types.ts";
 import { createChatLine } from "./parseChat.ts";
 
-export function getDialogueFromUrl(container: Container, url: string) {
+let isTextLoaded = false;
+
+export function getDialogueFromUrl(app: Application, container: Container, url: string) {
+
+    const loadingText = addLoadingText(app, container, "Loading...");
+    loadingText.visible = !isTextLoaded;
 
     fetch(url)
         .then(res => res.json())
         .then((res: MagicType) => {
+            isTextLoaded = true;
+            loadingText.visible = false;
             insertDialogueToContainer(container, res.dialogue, res.avatars);
         })
 
+}
+
+function addLoadingText(app: Application, container: Container, text: string) {
+    const loadingText = new Text({
+        text: text,
+        style: {
+            fontSize: 30,
+            fill: 0xffffff
+        }
+    });
+
+    loadingText.anchor.set(0.5);
+    loadingText.x = app.screen.width / 2;
+    loadingText.y = app.screen.height * (2 / 10);
+
+    container.addChild(loadingText);
+    return loadingText;
 }
 
 function insertDialogueToContainer(container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
@@ -40,7 +64,7 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
     })
 }
 
-function getAlignFromAvatar(avatars: AvatarsType[], dialogueObject:DialogueType) {
+function getAlignFromAvatar(avatars: AvatarsType[], dialogueObject: DialogueType) {
     return (avatars.find(avatar => {
         return avatar.name === dialogueObject.name;
     }) || {position: "right"}).position;

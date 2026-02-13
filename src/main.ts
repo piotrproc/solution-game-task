@@ -1,12 +1,12 @@
 import { Application, Assets, Container } from 'pixi.js';
 import { addFpsInfo, addMainPageTitle } from "./components/gui/texts.ts";
-import { gameState } from "./components/ace/globalVariables/states.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
 import { addBackButton, addTaskButtons } from "./components/gui/lobby.ts";
 import { getDialogueFromUrl } from "./components/magic/getDialogue.ts";
-import { MAGIC_DIALOGUE_URL } from "./components/magic/globalVariables/consts.ts";
+import { MAGIC_DIALOGUE_URL } from "./components/magic/consts.ts";
 import { createParticles } from "./components/phoenix/particles.ts";
+import { hideAllTabs } from "./components/utils.ts";
 
 (async () => {
     const app = new Application();
@@ -38,8 +38,6 @@ import { createParticles } from "./components/phoenix/particles.ts";
         {alias: "user-neighbour", src: 'https://api.dicebear.com/9.x/personas/png', loadParser: 'loadTextures'},
     ]);
 
-    gameState.value = "Initial";
-
     const mainPage = new Container();
     const acePage = new Container();
     const magicPage = new Container();
@@ -51,26 +49,20 @@ import { createParticles } from "./components/phoenix/particles.ts";
     addMainPageTitle(app, phoenixPage, "Phoenix Flame");
 
     addTaskButtons(app, mainPage, [() => {
-            app.stage.children[0].visible = false;
+            hideAllTabs(app);
             app.stage.children[1].visible = true;
-            app.stage.children[2].visible = false;
-            app.stage.children[3].visible = false;
 
             const cards = createCards(app, acePage);
             animateCardsInLoop(app, cards);
         },
         () => {
-            app.stage.children[0].visible = false;
-            app.stage.children[1].visible = false;
+            hideAllTabs(app);
             app.stage.children[2].visible = true;
-            app.stage.children[3].visible = false;
 
-            getDialogueFromUrl(magicPage, MAGIC_DIALOGUE_URL)
+            getDialogueFromUrl(app, magicPage, MAGIC_DIALOGUE_URL)
         },
         () => {
-            app.stage.children[0].visible = false;
-            app.stage.children[1].visible = false;
-            app.stage.children[2].visible = false;
+            hideAllTabs(app);
             app.stage.children[3].visible = true;
             app.renderer.background.color = "#40cbde";
 
@@ -86,10 +78,8 @@ import { createParticles } from "./components/phoenix/particles.ts";
     app.stage.addChild(magicPage);
     app.stage.addChild(phoenixPage);
 
+    hideAllTabs(app);
     app.stage.children[0].visible = true;
-    app.stage.children[1].visible = false;
-    app.stage.children[2].visible = false;
-    app.stage.children[3].visible = false;
 
     addBackButton(app, app.stage);
     addFpsInfo(app, app.stage);

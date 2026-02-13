@@ -1,4 +1,5 @@
 import { Application, Container, Sprite, Text } from "pixi.js";
+import { hideAllTabs } from "../utils.ts";
 
 export function addTaskButtons(app: Application, container: Container, onClick: (() => void)[]) {
 
@@ -43,10 +44,8 @@ export function addBackButton(app: Application, container: Container) {
     styleBackButton(app, button);
 
     button.addListener('pointerdown', () => {
+        hideAllTabs(app);
         app.stage.children[0].visible = true;
-        app.stage.children[1].visible = false;
-        app.stage.children[2].visible = false;
-        app.stage.children[3].visible = false;
         app.renderer.background.color = "#06a159";
     });
 

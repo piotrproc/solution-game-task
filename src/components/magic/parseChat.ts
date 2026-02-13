@@ -1,5 +1,5 @@
 import { Container, Sprite, Text } from "pixi.js";
-import { EMOJIS } from "./globalVariables/consts.ts";
+import { EMOJIS } from "./consts.ts";
 
 function parseMessage(text: string) {
     const regex = /{(.*?)}/g;

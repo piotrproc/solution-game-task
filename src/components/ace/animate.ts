@@ -1,5 +1,5 @@
 import { Application, Sprite, Ticker } from "pixi.js";
-import { CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./globalVariables/consts.ts";
+import { CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./consts.ts";
 
 export function animateCardsInLoop(app: Application, cardsOnStacks: Sprite[][]) {
     for (let i = 0; i < 10; i++) {
