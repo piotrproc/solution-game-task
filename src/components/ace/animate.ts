@@ -18,9 +18,9 @@ export function animateCards(app: Application, cardsOnStacks: Sprite[][]) {
     const lastElement2 = cardsOnStacks[1].pop() as Sprite;
     const lastElement3 = cardsOnStacks[2].pop() as Sprite;
 
-    createRotationAnimation(app, lastElement1, 0);
-    createRotationAnimation(app, lastElement2, 1);
-    createRotationAnimationLastColumn(app, lastElement3);
+    createShuffleAnimation(app, lastElement1, 0);
+    createShuffleAnimation(app, lastElement2, 1);
+    createShuffleAnimation(app, lastElement3, 2);
 
     cardsOnStacks[0].unshift(lastElement3);
     cardsOnStacks[1].unshift(lastElement1);
@@ -35,8 +35,9 @@ export function moveAllCardsExceptOne(cards: Sprite[], stackIndex: number) {
     })
 }
 
-export function createRotationAnimation(app: Application, sprite: Sprite, stackIndex: number) {
-    sprite.zIndex = stackIndex * 2 + 1;
+export function createShuffleAnimation(app: Application, sprite: Sprite, stackIndex: number) {
+    const moveOneColumn = stackIndex === 0 || stackIndex === 1;
+    sprite.zIndex = moveOneColumn ? (stackIndex * 2 + 1) : -1;
 
     let offsetX = 0;
     let offsetY = 0;
@@ -48,43 +49,12 @@ export function createRotationAnimation(app: Application, sprite: Sprite, stackI
     let flagY = false;
 
     ticker.add(() => {
-        if (offsetX < app.screen.width / 4) {
-            sprite.x += app.screen.width / 400;
-            offsetX += app.screen.width / 400;
-        } else {
-            flagX = true;
-        }
+        const numberOfColumns = moveOneColumn ? 1 : 2;
 
-        if (offsetY < DECK_HEIGHT) {
-            sprite.y -= DECK_HEIGHT / CARDS_IN_COLUMN / 2;
-            offsetY += DECK_HEIGHT / CARDS_IN_COLUMN / 2;
-        } else {
-            flagY = true;
-        }
-
-        if (flagX && flagY) {
-            ticker.stop();
-        }
-    });
-    ticker.start();
-}
-
-export function createRotationAnimationLastColumn(app: Application, sprite: Sprite) {
-    sprite.zIndex = -1;
-
-    let offsetX = 0;
-    let offsetY = 0;
-
-    const ticker = new Ticker();
-    ticker.maxFPS = 50; // ensures the animation runs for 2 seconds
-
-    let flagX = false;
-    let flagY = false;
-
-    ticker.add(() => {
-        if (offsetX < app.screen.width / 2) {
-            sprite.x -= app.screen.width / 400 * 2;
-            offsetX += app.screen.width / 400 * 2;
+        if (offsetX < app.screen.width / 4 * numberOfColumns) {
+            const offset = app.screen.width / 400 * numberOfColumns;
+            sprite.x = moveOneColumn ? (sprite.x + offset) : (sprite.x - offset);
+            offsetX += app.screen.width / 400 * numberOfColumns;
         } else {
             flagX = true;
         }
