@@ -14,7 +14,7 @@ import { createParticles } from "./components/phoenix/particles.ts";
     globalThis.__PIXI_APP__ = app;
 
     await app.init({
-        background: "#06a159",
+        background: "#40cbde",
         height: 1050,
         width: 1200,
     });

@@ -15,7 +15,7 @@ export function createParticles(app: Application, bonusPage: Container) {
     // Add particles
     const texture = Texture.from('fire');
 
-    for (let i = 0; i < 50; ++i) {
+    for (let i = 0; i < 15; ++i) {
         const particle = new Particle({
             texture,
             x: Math.random() * app.screen.width,
@@ -53,7 +53,7 @@ export function createParticles(app: Application, bonusPage: Container) {
                 sprite.y = -10;
             }
 
-            //sprite.direction += sprite.turningSpeed * 0.01;
+            sprite["direction"] += sprite["turningSpeed"] * 0.01;
             sprite.x += Math.sin(sprite["direction"]) * sprite["speed"];
             sprite.y += Math.cos(sprite["direction"]) * sprite["speed"];
             sprite.rotation += sprite["turningSpeed"] / 100;

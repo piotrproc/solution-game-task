@@ -4,7 +4,8 @@ export function addMainPageTitle(app: Application, container: Container, text: s
     const winText = new Text({
         text: text,
         style: {
-            fontSize: 40
+            fontSize: 40,
+            fill: 0xffffff
         }
     });
 

@@ -1,7 +1,7 @@
 import { Container, Sprite, Text } from "pixi.js";
 import { EMOJIS } from "./globalVariables/consts.ts";
 
-function parseMessage(text) {
+function parseMessage(text: string) {
     const regex = /{(.*?)}/g;
     const parts: { type: string, value: string }[] = [];
 

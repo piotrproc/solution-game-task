@@ -12,7 +12,8 @@ export function addTaskButtons(app: Application, container: Container, onClick: 
         const button = new Text({
             text: TEXTS[i],
             style: {
-                fontSize: 30
+                fontSize: 30,
+                fill: 0xffffff
             }
         });
 
