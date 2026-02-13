@@ -1,4 +1,5 @@
 import { Application, Container, Particle, ParticleContainer, Texture, Ticker } from 'pixi.js';
+import { addFpsInfo } from "../gui/texts.ts";
 
 let areParticlesAdded = false;
 
@@ -69,6 +70,8 @@ export function createParticles(app: Application, bonusPage: Container) {
     });
 
     ticker.start();
+    addFpsInfo(ticker, bonusPage, {x:10, y: 50}, "Task 3 FPS:");
+
     return ticker;
 }
 

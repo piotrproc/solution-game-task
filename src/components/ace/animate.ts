@@ -1,5 +1,6 @@
 import { Application, Sprite, Ticker } from "pixi.js";
 import { CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./consts.ts";
+import { addFpsInfo } from "../gui/texts.ts";
 
 export function animateCardsInLoop(app: Application, cardsOnStacks: Sprite[][]) {
     for (let i = 0; i < 10; i++) {
@@ -71,4 +72,5 @@ export function createShuffleAnimation(app: Application, sprite: Sprite, stackIn
         }
     });
     ticker.start();
+    addFpsInfo(ticker, app.stage.children[1], {x:10, y: 50}, "Task 1 FPS:");
 }

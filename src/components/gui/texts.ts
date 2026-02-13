@@ -1,4 +1,4 @@
-import { Application, Container, Text } from "pixi.js";
+import { Application, Container, Text, Ticker } from "pixi.js";
 
 export function addMainPageTitle(app: Application, container: Container, text: string): Text {
     const winText = new Text({
@@ -17,18 +17,18 @@ export function addMainPageTitle(app: Application, container: Container, text: s
     return winText;
 }
 
-export function addFpsInfo(app: Application, container: Container) {
-    const fpsText = new Text('FPS: 0', {
+export function addFpsInfo(ticker: Ticker, container: Container, position: {x:number, y:number}, name: string) {
+    const fpsText = new Text(`${name} 0`, {
         fontFamily: 'Arial',
         fontSize: 24,
         fill: 0xffffff,
     });
 
-    fpsText.x = 10;
-    fpsText.y = 10;
+    fpsText.x = position.x;
+    fpsText.y = position.y;
 
-    app.ticker.add(() => {
-        fpsText.text = `FPS: ${Math.round(app.ticker.FPS)}`;
+    ticker.add(() => {
+        fpsText.text = `${name} ${Math.round(ticker.FPS)}`;
     });
 
     container.addChild(fpsText);

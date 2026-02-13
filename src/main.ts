@@ -82,5 +82,5 @@ import { hideAllTabs } from "./components/utils.ts";
     app.stage.children[0].visible = true;
 
     addBackButton(app, app.stage);
-    addFpsInfo(app, app.stage);
+    addFpsInfo(app.ticker, app.stage, {x:10, y:10}, "FPS:");
 })();
