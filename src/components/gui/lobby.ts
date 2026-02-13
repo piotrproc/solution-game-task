@@ -47,6 +47,7 @@ export function addBackButton(app: Application, container: Container) {
         app.stage.children[1].visible = false;
         app.stage.children[2].visible = false;
         app.stage.children[3].visible = false;
+        app.renderer.background.color = "#06a159";
     });
 
     container.addChild(button);

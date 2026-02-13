@@ -14,7 +14,7 @@ import { createParticles } from "./components/phoenix/particles.ts";
     globalThis.__PIXI_APP__ = app;
 
     await app.init({
-        background: "#40cbde",
+        background: "#06a159",
         height: 1050,
         width: 1200,
     });
@@ -72,6 +72,7 @@ import { createParticles } from "./components/phoenix/particles.ts";
             app.stage.children[1].visible = false;
             app.stage.children[2].visible = false;
             app.stage.children[3].visible = true;
+            app.renderer.background.color = "#40cbde";
 
             createParticles(app, phoenixPage);
         }
