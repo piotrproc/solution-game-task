@@ -1,5 +1,7 @@
 import { Application, Container, Particle, ParticleContainer, Texture, Ticker } from 'pixi.js';
 
+let areParticlesAdded = false;
+
 export function createParticles(app: Application, bonusPage: Container) {
     // Create a particle container with default options
     const container = new ParticleContainer({
@@ -14,6 +16,10 @@ export function createParticles(app: Application, bonusPage: Container) {
 
     // Add particles
     const texture = Texture.from('fire');
+
+    if (areParticlesAdded) {
+        return;
+    }
 
     for (let i = 0; i < 15; ++i) {
         const particle = new Particle({
@@ -35,6 +41,8 @@ export function createParticles(app: Application, bonusPage: Container) {
 
         container.addParticle(particle);
     }
+
+    areParticlesAdded = true;
 
     // Add container to the Pixi stage
     bonusPage.addChild(container);
