@@ -52,9 +52,9 @@ export function createShuffleAnimation(app: Application, sprite: Sprite, stackIn
         const numberOfColumns = moveOneColumn ? 1 : 2;
 
         if (offsetX < app.screen.width / 4 * numberOfColumns) {
-            const offset = app.screen.width / 400 * numberOfColumns;
-            sprite.x = moveOneColumn ? (sprite.x + offset) : (sprite.x - offset);
-            offsetX += app.screen.width / 400 * numberOfColumns;
+            const animationOffset = app.screen.width / 400 * numberOfColumns;
+            sprite.x = moveOneColumn ? (sprite.x + animationOffset) : (sprite.x - animationOffset);
+            offsetX += animationOffset;
         } else {
             flagX = true;
         }
