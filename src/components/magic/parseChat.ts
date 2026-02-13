@@ -1,5 +1,5 @@
 import { Container, Sprite, Text } from "pixi.js";
-import { EMOJIS } from "./consts.ts";
+import { EMOJIS, MAX_LENGTH_FOR_ONE_LINE_MESSAGE, MAX_WIDTH_FOR_ONE_LINE_MESSAGE } from "./consts.ts";
 
 function parseMessage(text: string) {
     const regex = /{(.*?)}/g;
@@ -41,12 +41,20 @@ export function createChatLine(message, style) {
     let x = 0;
     const lineHeight = style.fontSize || 24;
 
+    const multilineTextStyle = Object.assign({}, style);
+
     for (const part of parts) {
 
         if (part.type === 'text') {
+            const isTextMultiline = part.value.length > MAX_LENGTH_FOR_ONE_LINE_MESSAGE;
+
+            if(isTextMultiline) {
+                multilineTextStyle._wordWrapWidth = MAX_WIDTH_FOR_ONE_LINE_MESSAGE;
+            }
+
             const text = new Text({
                 text: part.value,
-                style
+                style: isTextMultiline ? multilineTextStyle : style
             });
 
             text.x = x;
@@ -62,7 +70,7 @@ export function createChatLine(message, style) {
 
             sprite.width = lineHeight * 1.5;
             sprite.height = lineHeight * 1.5;
-            sprite.x = x;
+            sprite.x = x + 5;
             sprite.y = 0;
 
             x += sprite.width;

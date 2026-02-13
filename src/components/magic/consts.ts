@@ -12,4 +12,6 @@ export const EMOJIS = {
     Neighbour: 'user-neighbour',
 };
 
-export const HEIGHT_OF_ONE_MESSAGE = 65;
+export const HEIGHT_OF_ONE_MESSAGE = 80;
+export const MAX_WIDTH_FOR_ONE_LINE_MESSAGE = 730;
+export const MAX_LENGTH_FOR_ONE_LINE_MESSAGE = 60;

@@ -50,7 +50,9 @@ function insertDialogueToContainer(app:Application, container: Container, dialog
     const style = new TextStyle({
         fontFamily: 'Arial',
         fontSize: 24,
-        fill: 0xffffff
+        fill: 0xffffff,
+        wordWrap: true,
+        wordWrapWidth: 1500
     });
 
     dialogue.forEach((dialogueObject, index) => {
@@ -65,7 +67,7 @@ function insertDialogueToContainer(app:Application, container: Container, dialog
             chatLine.x = container.width;
         }
 
-        chatLine.position.set(50, 200 + index * 50);
+        chatLine.position.set(50, 200 + index * 70);
         container.addChild(chatLine);
     })
 }
