@@ -26,7 +26,7 @@ export function addTaskButtons(app: Application, container: Container, onClick: 
 function styleButtons(app: Application, sprite: Text, index: number) {
     sprite.anchor.set(0.5);
 
-    sprite.x = (app.screen.width / 5) + (index * 350);
+    sprite.x = (app.screen.width / 4) * (index + 1);
     sprite.y = app.screen.height * (1 / 2);
 
     sprite.eventMode = 'static';

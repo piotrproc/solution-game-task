@@ -15,12 +15,16 @@ import { hideAllTabs } from "./components/utils.ts";
 
     await app.init({
         background: "#06a159",
-        height: 1050,
-        width: 1200,
+        width: window.innerWidth,
+        height: window.innerHeight,
     });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
+
+    window.addEventListener('resize', () => {
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+    });
 
     // Load the textures
     await Assets.load([

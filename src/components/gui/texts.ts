@@ -11,7 +11,7 @@ export function addMainPageTitle(app: Application, container: Container, text: s
 
     winText.anchor.set(0.5);
     winText.x = app.screen.width / 2;
-    winText.y = app.screen.height * (1 / 7);
+    winText.y = app.screen.height * (1 / 9);
 
     container.addChild(winText);
     return winText;

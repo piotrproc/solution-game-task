@@ -1,5 +1,6 @@
 import { Application, Container, Particle, ParticleContainer, Texture, Ticker } from 'pixi.js';
 import { addFpsInfo } from "../gui/texts.ts";
+import { NUMBER_OF_PARTICLES } from "./consts.ts";
 
 let areParticlesAdded = false;
 
@@ -22,7 +23,7 @@ export function createParticles(app: Application, bonusPage: Container) {
         return;
     }
 
-    for (let i = 0; i < 15; ++i) {
+    for (let i = 0; i < NUMBER_OF_PARTICLES; ++i) {
         const particle = new Particle({
             texture,
             x: Math.random() * app.screen.width,
@@ -57,7 +58,7 @@ export function createParticles(app: Application, bonusPage: Container) {
 
             const sprite = container.particleChildren[i];
 
-            if (sprite.x > app.screen.width || sprite.y > app.screen.height) {
+            if (sprite.x > app.screen.width || sprite.y > app.screen.height ) {
                 sprite.x = Math.random() * app.screen.width;
                 sprite.y = -10;
             }

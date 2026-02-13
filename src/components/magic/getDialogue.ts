@@ -12,9 +12,12 @@ export function getDialogueFromUrl(app: Application, container: Container, url: 
     fetch(url)
         .then(res => res.json())
         .then((res: MagicType) => {
-            isTextLoaded = true;
-            loadingText.visible = false;
-            insertDialogueToContainer(container, res.dialogue, res.avatars);
+            if(!isTextLoaded) {
+                isTextLoaded = true;
+                loadingText.visible = false;
+
+                insertDialogueToContainer(app, container, res.dialogue, res.avatars);
+            }
         })
 
 }
@@ -36,7 +39,7 @@ function addLoadingText(app: Application, container: Container, text: string) {
     return loadingText;
 }
 
-function insertDialogueToContainer(container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
+function insertDialogueToContainer(app:Application, container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
 
     const style = new TextStyle({
         fontFamily: 'Arial',
@@ -55,7 +58,7 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
         const align = getAlignFromAvatar(avatars, dialogueObject)
 
         if (align === "right") {
-            chatLine.pivot.x = chatLine.width - 1050;
+            chatLine.pivot.x = chatLine.width - app.screen.width + 100;
             chatLine.x = container.width;
         }
 
