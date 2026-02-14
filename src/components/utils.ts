@@ -11,3 +11,7 @@ export function showTab(index: number) {
     hideAllTabs()
     app.stage.children[index].visible = true;
 }
+
+export function isPortrait() {
+    return window.innerWidth < window.innerHeight;
+}

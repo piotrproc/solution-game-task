@@ -1,9 +1,10 @@
-import { Container, Text, TextStyle } from "pixi.js";
+import { Container, isMobile, Text, TextStyle } from "pixi.js";
 import { AvatarsType, DialogueType, MagicType } from "./types.ts";
 import { createChatLine } from "./parseChat.ts";
 import { SCREEN_SIZE_Y } from "../states.ts";
 import { HEIGHT_OF_ONE_MESSAGE } from "./consts.ts";
 import { app } from "../../main.ts";
+import { isPortrait } from "../utils.ts";
 
 let isTextLoaded = false;
 
@@ -50,7 +51,7 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
 
     const style = new TextStyle({
         fontFamily: 'Arial',
-        fontSize: 24,
+        fontSize: isMobile.any && isPortrait() ? 12 : 24,
         fill: 0xffffff,
         wordWrap: true,
         wordWrapWidth: 1500

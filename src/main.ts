@@ -1,4 +1,4 @@
-import { Application, Assets, Container, isMobile } from 'pixi.js';
+import { Application, Assets, Container } from 'pixi.js';
 import { addFpsInfo, addMainPageTitle } from "./components/gui/texts.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
@@ -30,13 +30,8 @@ export const app = new Application();
 
     resize();
 
-    if (isMobile.any) {
-        window.screen.orientation['lock']('portrait');
-    }
-
     window.addEventListener("orientationchange", () => {
         window.location.reload();
-        window.screen.orientation['lock']('portrait');
     });
 
     // Load the textures
