@@ -1,7 +1,6 @@
 import { Application, Container, Sprite, Text } from "pixi.js";
 import { hideAllTabs } from "../utils.ts";
 import { TASK_TEXTS } from "./consts.ts";
-import { INITIAL_SCREEN_SIZE_Y } from "../states.ts";
 
 export function addTaskButtons(app: Application, container: Container, onClick: (() => void)[]) {
 
@@ -43,7 +42,6 @@ export function addBackButton(app: Application, container: Container) {
         hideAllTabs(app);
         app.stage.children[0].visible = true;
         app.renderer.background.color = "#06a159";
-        app.renderer.resize(app.screen.width, INITIAL_SCREEN_SIZE_Y.value);
     });
 
     container.addChild(button);

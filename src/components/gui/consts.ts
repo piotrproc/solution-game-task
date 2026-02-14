@@ -1,5 +1,7 @@
+import { isMobile } from "pixi.js";
+
 export const TASK_TEXTS = [
-    "1st assigment",
-    "2nd assigment",
-    "3rd assigment"
+    isMobile.any ? "1st task" : "1st assignment",
+    isMobile.any ? "2st task" : "2st assignment",
+    isMobile.any ? "3st task" : "3st assignment"
 ];

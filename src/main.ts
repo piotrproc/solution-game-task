@@ -8,6 +8,7 @@ import { MAGIC_DIALOGUE_URL } from "./components/magic/consts.ts";
 import { createParticles } from "./components/phoenix/particles.ts";
 import { hideAllTabs } from "./components/utils.ts";
 import { INITIAL_SCREEN_SIZE_Y } from "./components/states.ts";
+import { resize } from "./components/gui/resize.ts";
 
 (async () => {
     const app = new Application();
@@ -25,8 +26,15 @@ import { INITIAL_SCREEN_SIZE_Y } from "./components/states.ts";
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    window.addEventListener('resize', () => {
-        app.renderer.resize(window.innerWidth, window.innerHeight);
+    window.addEventListener('resize', ()=> resize(app));
+
+    resize(app);
+
+    window.screen.orientation['lock']('portrait');
+
+    window.addEventListener("orientationchange", () => {
+        window.location.reload();
+        window.screen.orientation['lock']('portrait');
     });
 
     // Load the textures
@@ -50,7 +58,7 @@ import { INITIAL_SCREEN_SIZE_Y } from "./components/states.ts";
     const magicPage = new Container();
     const phoenixPage = new Container();
 
-    addMainPageTitle(app, mainPage, "Game Development Assignment");
+    addMainPageTitle(app, mainPage, "Assignment");
     addMainPageTitle(app, acePage, "Ace of Shadows");
     addMainPageTitle(app, magicPage, "Magic Words");
     addMainPageTitle(app, phoenixPage, "Phoenix Flame");
