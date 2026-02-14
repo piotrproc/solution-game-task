@@ -1,4 +1,4 @@
-import { Application, Assets, Container } from 'pixi.js';
+import { Application, Assets, Container, isMobile } from 'pixi.js';
 import { addFpsInfo, addMainPageTitle } from "./components/gui/texts.ts";
 import { createCards } from "./components/ace/card.ts";
 import { animateCardsInLoop } from "./components/ace/animate.ts";
@@ -6,13 +6,13 @@ import { addBackButton, addTaskButtons } from "./components/gui/lobby.ts";
 import { getDialogueFromUrl } from "./components/magic/getDialogue.ts";
 import { MAGIC_DIALOGUE_URL } from "./components/magic/consts.ts";
 import { createParticles } from "./components/phoenix/particles.ts";
-import { hideAllTabs } from "./components/utils.ts";
+import { showTab } from "./components/utils.ts";
 import { INITIAL_SCREEN_SIZE_Y } from "./components/states.ts";
 import { resize } from "./components/gui/resize.ts";
 
-(async () => {
-    const app = new Application();
+export const app = new Application();
 
+(async () => {
     globalThis.__PIXI_APP__ = app;
 
     await app.init({
@@ -26,11 +26,13 @@ import { resize } from "./components/gui/resize.ts";
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    window.addEventListener('resize', ()=> resize(app));
+    window.addEventListener('resize', resize);
 
-    resize(app);
+    resize();
 
-    window.screen.orientation['lock']('portrait');
+    if (isMobile.any) {
+        window.screen.orientation['lock']('portrait');
+    }
 
     window.addEventListener("orientationchange", () => {
         window.location.reload();
@@ -58,30 +60,27 @@ import { resize } from "./components/gui/resize.ts";
     const magicPage = new Container();
     const phoenixPage = new Container();
 
-    addMainPageTitle(app, mainPage, "Assignment");
-    addMainPageTitle(app, acePage, "Ace of Shadows");
-    addMainPageTitle(app, magicPage, "Magic Words");
-    addMainPageTitle(app, phoenixPage, "Phoenix Flame");
+    addMainPageTitle(mainPage, "Assignment");
+    addMainPageTitle(acePage, "Ace of Shadows");
+    addMainPageTitle(magicPage, "Magic Words");
+    addMainPageTitle(phoenixPage, "Phoenix Flame");
 
-    addTaskButtons(app, mainPage, [() => {
-            hideAllTabs(app);
-            app.stage.children[1].visible = true;
+    addTaskButtons(mainPage, [() => {
+            showTab(1);
 
-            const cards = createCards(app, acePage);
-            animateCardsInLoop(app, cards);
+            const cards = createCards(acePage);
+            animateCardsInLoop(cards);
         },
         () => {
-            hideAllTabs(app);
-            app.stage.children[2].visible = true;
+            showTab(2);
 
-            getDialogueFromUrl(app, magicPage, MAGIC_DIALOGUE_URL)
+            getDialogueFromUrl(magicPage, MAGIC_DIALOGUE_URL)
         },
         () => {
-            hideAllTabs(app);
-            app.stage.children[3].visible = true;
+            showTab(3);
             app.renderer.background.color = "#40cbde";
 
-            createParticles(app, phoenixPage);
+            createParticles(phoenixPage);
         }
     ])
 
@@ -93,9 +92,8 @@ import { resize } from "./components/gui/resize.ts";
     app.stage.addChild(magicPage);
     app.stage.addChild(phoenixPage);
 
-    hideAllTabs(app);
-    app.stage.children[0].visible = true;
+    showTab(0);
 
-    addBackButton(app, app.stage);
+    addBackButton(app.stage);
     addFpsInfo(app.ticker, app.stage, {x:10, y:10}, "FPS:");
 })();

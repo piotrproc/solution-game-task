@@ -1,26 +1,27 @@
-import { Application, Container, Sprite } from "pixi.js";
+import { Container, Sprite } from "pixi.js";
 import { CARD_HEIGHT, CARD_WIDTH, CARDS_IN_COLUMN, NUMBER_OF_CARDS } from "./consts.ts";
+import { app } from "../../main.ts";
 
-export function createCards(app: Application, mainPage: Container) {
+export function createCards(mainPage: Container) {
     const cards:Sprite[][] = [[], [], []];
 
     for (let i = 0; i < NUMBER_OF_CARDS; i++) {
         const cardIndex = Math.floor(i / CARDS_IN_COLUMN);
-        cards[cardIndex].push(createCard(app, mainPage, i));
+        cards[cardIndex].push(createCard(mainPage, i));
     }
 
     return cards;
 }
 
-function createCard(app: Application, mainPage:Container, index: number) {
+function createCard(mainPage:Container, index: number) {
     const card = Sprite.from("card");
-    styleCard(app, card, index);
+    styleCard(card, index);
 
     mainPage.addChild(card);
     return card;
 }
 
-function styleCard(app: Application, card: Sprite, index: number) {
+function styleCard(card: Sprite, index: number) {
     card.anchor.set(0.5);
 
     const columnIndex = Math.floor(index / CARDS_IN_COLUMN);

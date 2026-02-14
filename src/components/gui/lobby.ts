@@ -1,8 +1,9 @@
-import { Application, Container, Sprite, Text } from "pixi.js";
-import { hideAllTabs } from "../utils.ts";
+import { Container, Sprite, Text } from "pixi.js";
+import { showTab } from "../utils.ts";
 import { TASK_TEXTS } from "./consts.ts";
+import { app } from "../../main.ts";
 
-export function addTaskButtons(app: Application, container: Container, onClick: (() => void)[]) {
+export function addTaskButtons(container: Container, onClick: (() => void)[]) {
 
     for (let i = 0; i < 3; i++) {
         const button = new Text({
@@ -13,7 +14,7 @@ export function addTaskButtons(app: Application, container: Container, onClick: 
             }
         });
 
-        styleButtons(app, button, i);
+        styleButtons(button, i);
 
         button.addListener('pointerdown', () => {
             onClick[i]();
@@ -23,7 +24,7 @@ export function addTaskButtons(app: Application, container: Container, onClick: 
     }
 }
 
-function styleButtons(app: Application, sprite: Text, index: number) {
+function styleButtons(sprite: Text, index: number) {
     sprite.anchor.set(0.5);
 
     sprite.x = (app.screen.width / 4) * (index + 1);
@@ -33,21 +34,20 @@ function styleButtons(app: Application, sprite: Text, index: number) {
     sprite.cursor = 'pointer';
 }
 
-export function addBackButton(app: Application, container: Container) {
+export function addBackButton(container: Container) {
     const button = Sprite.from("button-back");
 
-    styleBackButton(app, button);
+    styleBackButton(button);
 
     button.addListener('pointerdown', () => {
-        hideAllTabs(app);
-        app.stage.children[0].visible = true;
+        showTab(0);
         app.renderer.background.color = "#06a159";
     });
 
     container.addChild(button);
 }
 
-function styleBackButton(app: Application, sprite: Sprite) {
+function styleBackButton(sprite: Sprite) {
     sprite.anchor.set(0.5);
 
     sprite.x = app.screen.width * 0.9;

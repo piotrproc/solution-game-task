@@ -1,16 +1,17 @@
-import { Application, Sprite, Ticker } from "pixi.js";
+import { Sprite, Ticker } from "pixi.js";
 import { CARDS_IN_COLUMN, DECK_HEIGHT, ROUND_TIME } from "./consts.ts";
 import { addFpsInfo } from "../gui/texts.ts";
+import { app } from "../../main.ts";
 
-export function animateCardsInLoop(app: Application, cardsOnStacks: Sprite[][]) {
+export function animateCardsInLoop(cardsOnStacks: Sprite[][]) {
     for (let i = 0; i < 10; i++) {
         setTimeout(() => {
-            animateCards(app, cardsOnStacks);
+            animateCards(cardsOnStacks);
         }, i * ROUND_TIME);
     }
 }
 
-export function animateCards(app: Application, cardsOnStacks: Sprite[][]) {
+export function animateCards(cardsOnStacks: Sprite[][]) {
     moveAllCardsExceptOne(cardsOnStacks[0], 0)
     moveAllCardsExceptOne(cardsOnStacks[1], 1)
     moveAllCardsExceptOne(cardsOnStacks[2], 2)
@@ -19,9 +20,9 @@ export function animateCards(app: Application, cardsOnStacks: Sprite[][]) {
     const lastElement2 = cardsOnStacks[1].pop() as Sprite;
     const lastElement3 = cardsOnStacks[2].pop() as Sprite;
 
-    createShuffleAnimation(app, lastElement1, 0);
-    createShuffleAnimation(app, lastElement2, 1);
-    createShuffleAnimation(app, lastElement3, 2);
+    createShuffleAnimation(lastElement1, 0);
+    createShuffleAnimation(lastElement2, 1);
+    createShuffleAnimation(lastElement3, 2);
 
     cardsOnStacks[0].unshift(lastElement3);
     cardsOnStacks[1].unshift(lastElement1);
@@ -36,7 +37,7 @@ export function moveAllCardsExceptOne(cards: Sprite[], stackIndex: number) {
     })
 }
 
-export function createShuffleAnimation(app: Application, sprite: Sprite, stackIndex: number) {
+export function createShuffleAnimation(sprite: Sprite, stackIndex: number) {
     const moveOneColumn = stackIndex === 0 || stackIndex === 1;
     sprite.zIndex = moveOneColumn ? (stackIndex * 2 + 1) : -1;
 

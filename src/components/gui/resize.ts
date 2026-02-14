@@ -1,7 +1,7 @@
-import { Application } from "pixi.js";
+import { app } from "../../main.ts";
 
 /** Set up a resize function for the app */
-export function resize(app:Application) {
+export function resize() {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const minWidth = 500;

@@ -1,14 +1,15 @@
-import { Application, Container, Text, TextStyle } from "pixi.js";
+import { Container, Text, TextStyle } from "pixi.js";
 import { AvatarsType, DialogueType, MagicType } from "./types.ts";
 import { createChatLine } from "./parseChat.ts";
 import { SCREEN_SIZE_Y } from "../states.ts";
 import { HEIGHT_OF_ONE_MESSAGE } from "./consts.ts";
+import { app } from "../../main.ts";
 
 let isTextLoaded = false;
 
-export function getDialogueFromUrl(app: Application, container: Container, url: string) {
+export function getDialogueFromUrl(container: Container, url: string) {
 
-    const loadingText = addLoadingText(app, container, "Loading...");
+    const loadingText = addLoadingText(container, "Loading...");
     loadingText.visible = !isTextLoaded;
 
     app.renderer.resize(app.screen.width, SCREEN_SIZE_Y.value);
@@ -20,7 +21,7 @@ export function getDialogueFromUrl(app: Application, container: Container, url: 
                 isTextLoaded = true;
                 loadingText.visible = false;
 
-                insertDialogueToContainer(app, container, res.dialogue, res.avatars);
+                insertDialogueToContainer(container, res.dialogue, res.avatars);
                 SCREEN_SIZE_Y.value = res.dialogue.length * HEIGHT_OF_ONE_MESSAGE;
                 app.renderer.resize(app.screen.width, SCREEN_SIZE_Y.value);
             }
@@ -28,7 +29,7 @@ export function getDialogueFromUrl(app: Application, container: Container, url: 
 
 }
 
-function addLoadingText(app: Application, container: Container, text: string) {
+function addLoadingText(container: Container, text: string) {
     const loadingText = new Text({
         text: text,
         style: {
@@ -45,7 +46,7 @@ function addLoadingText(app: Application, container: Container, text: string) {
     return loadingText;
 }
 
-function insertDialogueToContainer(app:Application, container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
+function insertDialogueToContainer(container: Container, dialogue: DialogueType[], avatars: AvatarsType[]) {
 
     const style = new TextStyle({
         fontFamily: 'Arial',

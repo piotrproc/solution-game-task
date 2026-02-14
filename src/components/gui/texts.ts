@@ -1,6 +1,7 @@
-import { Application, Container, Text, Ticker } from "pixi.js";
+import { Container, Text, Ticker } from "pixi.js";
+import { app } from "../../main.ts";
 
-export function addMainPageTitle(app: Application, container: Container, text: string): Text {
+export function addMainPageTitle(container: Container, text: string): Text {
     const winText = new Text({
         text: text,
         style: {

@@ -1,10 +1,11 @@
-import { Application, Container, Particle, ParticleContainer, Texture, Ticker } from 'pixi.js';
+import { Container, Particle, ParticleContainer, Texture, Ticker } from 'pixi.js';
 import { addFpsInfo } from "../gui/texts.ts";
 import { NUMBER_OF_PARTICLES } from "./consts.ts";
+import { app } from "../../main.ts";
 
 let areParticlesAdded = false;
 
-export function createParticles(app: Application, bonusPage: Container) {
+export function createParticles(bonusPage: Container) {
     // Create a particle container with default options
     const container = new ParticleContainer({
         // this is the default, but we show it here for clarity
