@@ -18,4 +18,4 @@ npm run dev
 ## Notes
 
 - Game is deployed by vercel:
-    - TBD.
+    - https://solution-game-task.vercel.app/
