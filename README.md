@@ -14,6 +14,7 @@ npm run dev
 - Pixi.js version 8.14.3
 - Code split across 3 main tasks as was described in the instructions
 - Animations are executed by pixi.ticker
+- Application works on desktop and on mobile
 
 ## Notes
 
