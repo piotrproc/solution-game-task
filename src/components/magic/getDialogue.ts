@@ -51,7 +51,7 @@ function insertDialogueToContainer(container: Container, dialogue: DialogueType[
 
     const style = new TextStyle({
         fontFamily: 'Arial',
-        fontSize: isMobile.any && isPortrait() ? 12 : 24,
+        fontSize: isMobile.any && isPortrait() ? 12 : 30,
         fill: 0xffffff,
         wordWrap: true,
         wordWrapWidth: 1500

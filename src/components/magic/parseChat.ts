@@ -70,7 +70,7 @@ export function createChatLine(message, style) {
 
             sprite.width = lineHeight * 1.5;
             sprite.height = lineHeight * 1.5;
-            sprite.x = x + 5;
+            sprite.x = x + 2;
             sprite.y = 0;
 
             x += sprite.width;
